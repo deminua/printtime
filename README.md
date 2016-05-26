@@ -1,2 +1,2 @@
-# PT
-Printtime v2
+# Printtime App
+Printtime App
