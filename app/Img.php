@@ -25,71 +25,17 @@ class Img extends Model
         return $this->morphTo();
     }
 
-/*
-    public function getThumbnailPathAttribute($thumbnail_path)
+
+    public static function named($file, $filenameSuf = null) {
+      return (new static)->saveAs($file, $filenameSuf);
+    }
+
+
+    public function saveAs($file, $filenameSuf = null)
     {
-        return $this->attributes['thumbnail_path'] = '/'.$thumbnail_path;
-    }
-
-    public function getPathAttribute($path)
-    {
-        return $this->attributes['path'] = '/'.$path;
-    }
-    */
-
-	/*
-    public function getPathAttribute($path)
-    {
-        return $this->attributes['path'] = '/'.$this->base_dir.'/'.$path;
-    }
-    */
-    
-
-
-/*
-    public function setNameAttribute($name)
-    {
-    	    $rule = 'NFD; [:Nonspacing Mark:] Remove; NFC';
-			$myTrans = Transliterator::create($rule); 
-			#return $myTrans->transliterate($str);
-
-        return $this->attributes['name'] = $myTrans->transliterate($str);
-    }
-    */
-
-/*
-    public static function translit($str) {
-    		$rule = 'NFD; [:Nonspacing Mark:] Remove; NFC';
-			$myTrans = Transliterator::create($rule); 
-			return $myTrans->transliterate($str);
-    }
-    */
-
-
-    public static function named($file) {
-      return (new static)->saveAs($file);
-    }
-
-
-
-    public function saveAs($file)
-    {	
-    	/*
-        $this->name = $name;
-        $this->path = sprintf('%s/%s', $this->base_dir, $this->filename);
-        $this->thumbnail_path = sprintf('%s/thumbnail/%s', $this->base_dir, $this->filename);
-        
-        */
-
-		
-			#$name = str_slug($file->getClientOriginalName());
-			#$name = substr($name, 0, -3);
-			#$name .= '.';
-			#$name .= $file->getClientOriginalExtension();
-
         $this->user_id = Auth::user()->id;
         $this->name = $file->getClientOriginalName();
-        $this->filename = substr(str_slug($this->name), 0, -3).'.'.$file->getClientOriginalExtension();
+        $this->filename = substr(str_slug($this->name), 0, -3).$filenameSuf.'.'.$file->getClientOriginalExtension();
         $this->filemime = $file->getMimeType();
         $this->filesize = $file->getSize();
 
@@ -98,11 +44,10 @@ class Img extends Model
 
     public function move($file)
     {	
+        $file->move($this->base_dir, $this->filename);
 
-        $file->move($this->base_dir, $this->name);
-
-        $this->makeThumbnail();
         $this->resizeImg();
+        $this->makeThumbnail();
 
         return $this;
 
@@ -111,7 +56,7 @@ class Img extends Model
     public function resizeImg()
     {	
 
-        $path = sprintf('%s/%s', $this->base_dir, $this->name);
+        $path = sprintf('%s/%s', $this->base_dir, $this->filename);
         $path_new = sprintf('%s/%s', $this->base_dir, $this->filename);
 
         Image::make($path)->resize(1200, null, function ($constraint) {
@@ -122,7 +67,7 @@ class Img extends Model
 
     public function makeThumbnail()
     {
-    	$path = sprintf('%s/%s', $this->base_dir, $this->name);
+    	$path = sprintf('%s/%s', $this->base_dir, $this->filename);
         $path_new = sprintf('%s/thumbnail/%s', $this->base_dir, $this->filename);
         
         Image::make($path)->fit(250)->save($path_new);
