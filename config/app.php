@@ -159,6 +159,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        Printtime\PtAdmin\PrinttimeAdminProvider::class,
     ],
 
     /*

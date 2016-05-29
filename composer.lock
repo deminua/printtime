@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5bc04420c02d6f17ded02b50be4176e",
-    "content-hash": "696eae0c117b3a23aef6ac4a81ac2c5a",
+    "hash": "5be6307bded1edd823195f9f60a7c6e4",
+    "content-hash": "d67424271fdd0f723a6638dd1cbc5d12",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -482,16 +482,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.33",
+            "version": "v5.2.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4120808d2e841ba5a94c5e0443e9696ae4fa9bfe"
+                "reference": "6a26f3bb6a6e00c53654a661221643ad1b98e146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4120808d2e841ba5a94c5e0443e9696ae4fa9bfe",
-                "reference": "4120808d2e841ba5a94c5e0443e9696ae4fa9bfe",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6a26f3bb6a6e00c53654a661221643ad1b98e146",
+                "reference": "6a26f3bb6a6e00c53654a661221643ad1b98e146",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-05-25 18:35:42"
+            "time": "2016-05-26 21:59:46"
         },
         {
             "name": "league/flysystem",
@@ -2757,6 +2757,32 @@
                 "xunit"
             ],
             "time": "2015-10-02 06:51:40"
+        },
+        {
+            "name": "printtime/pt-admin",
+            "version": "1.0.6",
+            "dist": {
+                "type": "path",
+                "url": "packages/printtime/pt-admin\\",
+                "reference": "e28850163423a64233ff87174bd3746ae3cdf923",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Printtime\\PtAdmin\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "deminua",
+                    "email": "dataranenko@gmail.com.ua"
+                }
+            ],
+            "description": "Printtime admin panel"
         },
         {
             "name": "sebastian/comparator",
