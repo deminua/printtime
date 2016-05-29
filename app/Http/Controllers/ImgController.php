@@ -5,23 +5,50 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\ImgRequest;
 
 use App\Img;
 use App\Product;
+use Validator;
+
+
 
 class ImgController extends Controller
 {
 
 
-    public function upload($id, Request $request) {
+    public function upload($id, ImgRequest $request) {
+
+
+        if($request->ajax()) {
+
+		#$validator = Validator::make($request->all());
+
+/*
+		$messages = $validator->errors();
+
+		return response()->json($messages);
+
+		return $messages->first('file');
+
+		
+		if ($validator->fails()) {
+			return $validator->fails();
+			#return $validator->errors()->all();
+			#return $validator->errors()->all()->file[0];
+			#return response()->json(['name' => 'Abigail', 'state' => 'CA']);
+		}
+*/
 
 		$file = $request->file('file');
 
     	$img = $this->uniqfilename($file)->makeImg($file);
 
-		Product::find($id)->addImage($img);
+		Product::findOrFail($id)->addImage($img);
 
-    	return 'OK';
+    	return 'ok';
+
+    	}
     }
 
 		public function uniqfilename($file) {
